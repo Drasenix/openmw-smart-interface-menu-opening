@@ -5,27 +5,28 @@ local configPlayer = require('scripts.clickToCloseMenu.config.player')
 local l10n = core.l10n('clickToCloseMenu')
 local ui = require('openmw.ui')
 
-local function onKeyPress(key)
-   
+local windows = {}
+
+local function onKeyPress(key)      
    if key.code == input.KEY.I then
-      I.UI.setMode('Interface', {windows = {'Inventory'}})
+      table.insert(windows, 'Inventory')
+      I.UI.setMode('Interface', {windows = windows})
    end
 
    if key.code == input.KEY.M then
-      I.UI.setMode('Interface', {windows = {'Map'}})
+      table.insert(windows, 'Map')
+      I.UI.setMode('Interface', {windows = windows})
    end
 
    if key.code == input.KEY.O then
-      I.UI.setMode('Interface', {windows = {'Magic'}})
+      table.insert(windows, 'Magic')
+      I.UI.setMode('Interface', {windows = windows})
    end
 
    if key.code == input.KEY.H then
-      I.UI.setMode('Interface', {windows = {'Stats'}})
+      table.insert(windows, 'Stats')
+      I.UI.setMode('Interface', {windows = windows})
    end
-
-   
-   
-   
 end
 
 return {
