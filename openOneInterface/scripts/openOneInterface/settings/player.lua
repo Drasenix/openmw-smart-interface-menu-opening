@@ -1,21 +1,21 @@
 local core = require('openmw.core')
 local I = require('openmw.interfaces')
 
-local l10n = core.l10n('ClickToCloseMenu')
+local l10n = core.l10n('OpenOneInterface')
 local versionString = "1.0.0"
 
 -- Settings page
 I.Settings.registerPage {
-    key = 'ClickToCloseMenu',
-    l10n = 'ClickToCloseMenu',
+    key = 'OpenOneInterface',
+    l10n = 'OpenOneInterface',
     name = 'ConfigTitle',
     description = l10n('ConfigSummary'):gsub('%%{version}', versionString),
 }
 
 I.Settings.registerGroup {
-    key = 'Settings/ClickToCloseMenu/ClientOptions',
-    page = 'ClickToCloseMenu',
-    l10n = 'ClickToCloseMenu',
+    key = 'Settings/OpenOneInterface/ClientOptions',
+    page = 'OpenOneInterface',
+    l10n = 'OpenOneInterface',
     name = 'ConfigCategoryClientOptions',
     permanentStorage = true,
     settings = {                
@@ -24,7 +24,7 @@ I.Settings.registerGroup {
             renderer = 'select',
             name = 'Click',
             argument = {
-                l10n = 'ClickToCloseMenu',
+                l10n = 'OpenOneInterface',
                 items = {
                     'Right',
                     'Left',

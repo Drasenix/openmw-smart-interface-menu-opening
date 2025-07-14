@@ -1,7 +1,7 @@
 local async = require('openmw.async')
 local storage = require('openmw.storage')
 
-local options = storage.playerSection('Settings/ClickToCloseMenu/ClientOptions')
+local options = storage.playerSection('Settings/OpenOneInterface/ClientOptions')
 local configPlayer = {}
 
 local function updateConfig()
