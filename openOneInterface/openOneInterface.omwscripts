@@ -1,0 +1,2 @@
+PLAYER: scripts/openOneInterface/player.lua
+MENU: scripts/openOneInterface/settings/player.lua

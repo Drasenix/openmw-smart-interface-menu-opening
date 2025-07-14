@@ -1,0 +1,8 @@
+ConfigTitle: "Click To Close Menu"
+ConfigSummary: "Use your mouse to close every menu excepting Dialogues"
+
+ConfigCategoryClientOptions: "Client Options"
+Left: "Left"
+Middle: "Middle"
+Right: "Right"
+None: "None"
