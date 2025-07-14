@@ -52,5 +52,77 @@ I.Settings.registerGroup {
             description = 'Stats',
             default = input.KEY.H,
         },
+        {
+            key = 's_Key_Inventory_Map',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Inventory_Map',
+            description = 'Inventory_Map',
+            default = input.KEY.U,           
+        },
+
+        
+        {
+            key = 's_Key_Inventory_Magic',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Inventory_Magic',
+            description = 'Inventory_Magic',
+            default = input.KEY.P,                        
+        },
+        
+        {
+            key = 's_Key_Inventory_Stats',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Inventory_Stats',
+            description = 'Inventory_Stats',
+            default = input.KEY.K,
+        },
+        
+        {
+            key = 's_Key_Map_Magic',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Map_Magic',
+            description = 'Map_Magic',
+            default = input.KEY.C,
+        },
+
+        {
+            key = 's_Key_Magic_Stats',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Magic_Stats',
+            description = 'Magic_Stats',
+            default = input.KEY.Y,
+        },
+
+        {
+            key = 's_Key_Inventory_Map_Magic',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Inventory_Map_Magic',
+            description = 'Inventory_Map_Magic',
+            default = input.KEY.N,
+        },
+
+        {
+            key = 's_Key_Inventory_Map_Stats',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Inventory_Map_Stats',
+            description = 'Inventory_Map_Stats',
+            default = input.KEY.B,
+        },
+
+        {
+            key = 's_Key_Inventory_Map_Magic_Stats',
+            renderer = 'inputKeySelection',
+            argument = {},
+            name = 'Key_Inventory_Map_Magic_Stats',
+            description = 'Inventory_Map_Magic_Stats',
+            default = input.KEY.V,
+        }
     },
 }
