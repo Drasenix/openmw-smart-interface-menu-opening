@@ -1,5 +1,7 @@
 local core = require('openmw.core')
+local async = require('openmw.async')
 local input = require('openmw.input')
+local types = require('openmw.types')
 local self = require('openmw.self')
 local I = require('openmw.interfaces')
 local configPlayer = require('scripts.smartInterfaceMenuOpening.config.player')
@@ -8,6 +10,8 @@ local ui = require('openmw.ui')
 local menu_opened = false
 local menus_opened = {}
 local menus_requiring_pause = {}
+
+local autoMove = false
 
 local function menuAlreadyOpened(menusOpened, menusToOpen)
    for opened_key,opened_value in pairs(menusOpened) do
@@ -176,9 +180,37 @@ local function uiModeChanged(data)
    resetMenuForInterface(data)
 end
 
+-- code taken from the open mw playercontrols.lua
+local function controlsAllowed()
+   return not core.isWorldPaused()
+      and types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Controls)
+      -- here i removed cndition
+      -- and not I.UI.getMode()
+end
+
+-- code taken from the open mw playercontrols.lua
+local function movementAllowed()
+   return controlsAllowed() and not movementControlsOverridden
+end
+
+-- code taken from the open mw playercontrols.lua
+input.registerTriggerHandler('AutoMove', async:callback(function()
+   -- adding my condition not to control AutoMove from Interface Menu
+   if not movementAllowed() or menu_opened then return end
+      autoMove = not autoMove
+   end)
+)
+
+local function handleMovement()
+   if autoMove then
+      self.controls.movement = 1
+   end
+end
+
 return {
    engineHandlers = {
-      onKeyPress = onKeyPress
+      onKeyPress = onKeyPress,
+      onFrame = handleMovement
    },
    eventHandlers = {      
       AddUiMode = addUiMode,
