@@ -117,5 +117,12 @@ I.Settings.registerGroup {
             description = 'Inventory_Map_Stats',
             default = 0,
         },
+        {
+            key = 's_Key_Inventory_Magic_Stats',
+            renderer = 'inputKeySelection',            
+            name = 'Key_Inventory_Magic_Stats',
+            description = 'Inventory_Magic_Stats',
+            default = 0,
+        },
     },
 }

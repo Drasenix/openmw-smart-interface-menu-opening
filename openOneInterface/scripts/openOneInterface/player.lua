@@ -71,6 +71,13 @@ local function onKeyPress(key)
       table.insert(windows, 'Stats')
       self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows})      
    end
+
+   if key.code == configPlayer.options_trios.s_Key_Inventory_Magic_Stats then
+      table.insert(windows, 'Inventory')
+      table.insert(windows, 'Magic')
+      table.insert(windows, 'Stats')
+      self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows})      
+   end
 end
 
 return {
