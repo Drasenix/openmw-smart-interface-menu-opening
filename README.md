@@ -16,6 +16,8 @@ Launch the game
 
 Go to the Script tab in the options, select Smart Interface Menu Opening and choose the keyboard shortcuts you want.
 
+You can also choose to set the game to pause for each menu.
+
 In game, you can now open interface menus one by one or with combinations.
 
 You can close the menu with the same shortcut.
