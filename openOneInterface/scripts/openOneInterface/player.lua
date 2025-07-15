@@ -17,7 +17,7 @@ local function onKeyPress(key)
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == configPlayer.options_atoms.s_Key_Spells then
+   if key.code == configPlayer.options_atoms.s_Key_Magic then
       table.insert(windows, 'Magic')
       I.UI.setMode('Interface', {windows = windows})
    end
