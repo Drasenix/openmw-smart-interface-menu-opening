@@ -60,8 +60,6 @@ I.Settings.registerGroup {
             description = 'Inventory_Map',
             default = input.KEY.U,           
         },
-
-        
         {
             key = 's_Key_Inventory_Magic',
             renderer = 'inputKeySelection',
@@ -70,7 +68,6 @@ I.Settings.registerGroup {
             description = 'Inventory_Magic',
             default = input.KEY.P,                        
         },
-        
         {
             key = 's_Key_Inventory_Stats',
             renderer = 'inputKeySelection',
@@ -79,7 +76,6 @@ I.Settings.registerGroup {
             description = 'Inventory_Stats',
             default = input.KEY.K,
         },
-        
         {
             key = 's_Key_Map_Magic',
             renderer = 'inputKeySelection',
@@ -88,7 +84,6 @@ I.Settings.registerGroup {
             description = 'Map_Magic',
             default = input.KEY.C,
         },
-
         {
             key = 's_Key_Magic_Stats',
             renderer = 'inputKeySelection',
@@ -97,7 +92,6 @@ I.Settings.registerGroup {
             description = 'Magic_Stats',
             default = input.KEY.Y,
         },
-
         {
             key = 's_Key_Inventory_Map_Magic',
             renderer = 'inputKeySelection',
@@ -106,7 +100,6 @@ I.Settings.registerGroup {
             description = 'Inventory_Map_Magic',
             default = input.KEY.N,
         },
-
         {
             key = 's_Key_Inventory_Map_Stats',
             renderer = 'inputKeySelection',
@@ -115,7 +108,6 @@ I.Settings.registerGroup {
             description = 'Inventory_Map_Stats',
             default = input.KEY.B,
         },
-
         {
             key = 's_Key_Inventory_Map_Magic_Stats',
             renderer = 'inputKeySelection',

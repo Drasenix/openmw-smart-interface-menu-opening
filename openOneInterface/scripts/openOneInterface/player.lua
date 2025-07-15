@@ -1,87 +1,83 @@
 local core = require('openmw.core')
 local input = require('openmw.input')
 local I = require('openmw.interfaces')
-local configPlayer = require('scripts.clickToCloseMenu.config.player')
-local l10n = core.l10n('clickToCloseMenu')
+local configPlayer = require('scripts.openOneInterface.config.player')
 local ui = require('openmw.ui')
 
 
 local function onKeyPress(key)      
    windows = {}
-   if key.code == input.KEY.I then
+   if key.code == configPlayer.options.s_Key_Inventory then
       table.insert(windows, 'Inventory')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.M then
+   if key.code == configPlayer.options.s_Key_Map then
       table.insert(windows, 'Map')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.O then
+   if key.code == configPlayer.options.s_Key_Spells then
       table.insert(windows, 'Magic')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.H then
+   if key.code == configPlayer.options.s_Key_Stats then
       table.insert(windows, 'Stats')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.U then
+   if key.code == configPlayer.options.s_Key_Inventory_Map then
       table.insert(windows, 'Inventory')
       table.insert(windows, 'Map')
-      I.UI.setMode('Interface', {windows = windows})
-   end
-
-   
-   if key.code == input.KEY.P then
-      table.insert(windows, 'Inventory')
-      table.insert(windows, 'Magic')
       I.UI.setMode('Interface', {windows = windows})
    end
    
-   if key.code == input.KEY.K then
+   if key.code == configPlayer.options.s_Key_Inventory_Magic then
+      table.insert(windows, 'Inventory')
+      table.insert(windows, 'Magic')
+      I.UI.setMode('Interface', {windows = windows})
+   end
+   
+   if key.code == configPlayer.options.s_Key_Inventory_Stats then
       table.insert(windows, 'Inventory')
       table.insert(windows, 'Stats')
       I.UI.setMode('Interface', {windows = windows})
    end
    
-   if key.code == input.KEY.C then
+   if key.code == configPlayer.options.s_Key_Map_Magic then
       table.insert(windows, 'Map')
       table.insert(windows, 'Magic')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.Y then
+   if key.code == configPlayer.options.s_Key_Magic_Stats then
       table.insert(windows, 'Magic')
       table.insert(windows, 'Stats')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.N then
+   if key.code == configPlayer.options.s_Key_Inventory_Map_Magic then
       table.insert(windows, 'Inventory')
       table.insert(windows, 'Map')
       table.insert(windows, 'Magic')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.B then
+   if key.code == configPlayer.options.s_Key_Inventory_Map_Stats then
       table.insert(windows, 'Inventory')
       table.insert(windows, 'Map')
       table.insert(windows, 'Stats')
       I.UI.setMode('Interface', {windows = windows})
    end
 
-   if key.code == input.KEY.V then
+   if key.code == configPlayer.options.s_Key_Inventory_Map_Magic_Stats then
       table.insert(windows, 'Inventory')
       table.insert(windows, 'Map')
       table.insert(windows, 'Magic')
       table.insert(windows, 'Stats')
       I.UI.setMode('Interface', {windows = windows})
    end
-
-   
 end
 
 return {
