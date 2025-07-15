@@ -1,0 +1,2 @@
+PLAYER: scripts/smartInterfaceMenuOpening/player.lua
+MENU: scripts/smartInterfaceMenuOpening/settings/player.lua

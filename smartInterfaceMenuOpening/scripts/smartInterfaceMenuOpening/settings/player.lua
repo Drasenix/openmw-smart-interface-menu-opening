@@ -2,21 +2,21 @@ local core = require('openmw.core')
 local I = require('openmw.interfaces')
 local input = require("openmw.input")
 
-local l10n = core.l10n('OpenOneInterface')
+local l10n = core.l10n('SmartInterfaceMenuOpening')
 local versionString = "1.0.0"
 
 -- Settings page
 I.Settings.registerPage {
-    key = 'OpenOneInterface',
-    l10n = 'OpenOneInterface',
+    key = 'SmartInterfaceMenuOpening',
+    l10n = 'SmartInterfaceMenuOpening',
     name = 'ConfigTitle',
     description = l10n('ConfigSummary'):gsub('%%{version}', versionString),
 }
 
 I.Settings.registerGroup {
-    key = 'Settings/OpenOneInterface/KeyBindings/Atoms',
-    page = 'OpenOneInterface',
-    l10n = 'OpenOneInterface',
+    key = 'Settings/SmartInterfaceMenuOpening/KeyBindings/Atoms',
+    page = 'SmartInterfaceMenuOpening',
+    l10n = 'SmartInterfaceMenuOpening',
     name = 'ConfigKeybindingsAtoms',
     permanentStorage = true,
     settings = {        
@@ -52,9 +52,9 @@ I.Settings.registerGroup {
 }
 
 I.Settings.registerGroup {
-    key = 'Settings/OpenOneInterface/KeyBindings/Pairs',
-    page = 'OpenOneInterface',
-    l10n = 'OpenOneInterface',
+    key = 'Settings/SmartInterfaceMenuOpening/KeyBindings/Pairs',
+    page = 'SmartInterfaceMenuOpening',
+    l10n = 'SmartInterfaceMenuOpening',
     name = 'ConfigKeybindingsPairs',
     permanentStorage = true,
     settings = {                
@@ -97,9 +97,9 @@ I.Settings.registerGroup {
 }
 
 I.Settings.registerGroup {
-    key = 'Settings/OpenOneInterface/KeyBindings/Trios',
-    page = 'OpenOneInterface',
-    l10n = 'OpenOneInterface',
+    key = 'Settings/SmartInterfaceMenuOpening/KeyBindings/Trios',
+    page = 'SmartInterfaceMenuOpening',
+    l10n = 'SmartInterfaceMenuOpening',
     name = 'ConfigKeybindingsTrios',
     permanentStorage = true,
     settings = {                

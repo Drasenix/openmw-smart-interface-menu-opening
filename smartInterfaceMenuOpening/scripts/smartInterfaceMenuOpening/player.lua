@@ -2,7 +2,7 @@ local core = require('openmw.core')
 local input = require('openmw.input')
 local self = require('openmw.self')
 local I = require('openmw.interfaces')
-local configPlayer = require('scripts.openOneInterface.config.player')
+local configPlayer = require('scripts.smartInterfaceMenuOpening.config.player')
 local ui = require('openmw.ui')
 
 

@@ -1,9 +1,9 @@
 local async = require('openmw.async')
 local storage = require('openmw.storage')
 
-local options_atoms = storage.playerSection('Settings/OpenOneInterface/KeyBindings/Atoms')
-local options_pairs = storage.playerSection('Settings/OpenOneInterface/KeyBindings/Pairs')
-local options_trios = storage.playerSection('Settings/OpenOneInterface/KeyBindings/Trios')
+local options_atoms = storage.playerSection('Settings/SmartInterfaceMenuOpening/KeyBindings/Atoms')
+local options_pairs = storage.playerSection('Settings/SmartInterfaceMenuOpening/KeyBindings/Pairs')
+local options_trios = storage.playerSection('Settings/SmartInterfaceMenuOpening/KeyBindings/Trios')
 local configPlayer = {}
 
 local function updateConfig()

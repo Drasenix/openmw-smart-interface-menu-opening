@@ -1,5 +1,5 @@
-ConfigTitle: "Open One Interface"
-ConfigSummary: "Use keyboard shortcuts to open interface menus one by one"
+ConfigTitle: "Smart Interface Menu Opening (SIMO)"
+ConfigSummary: "Use keyboard shortcuts to open interface menus one by one or with combinations"
 
 ConfigKeybindingsAtoms: "Key bindings One Menu"
 Key_Inventory: "Inventory"

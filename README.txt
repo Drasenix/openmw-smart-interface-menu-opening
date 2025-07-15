@@ -7,12 +7,12 @@ How to install
 
 Create a folder containing the downloaded files.
 Launch OpenMW launcher and add Data Files by selecting the created folder.
-Check the box named openOneInterface.omwscript.
+Check the box named smartInterfaceMenuOpening.omwscript.
 
 Launch the game
 
 How to use
 
-Go to the Script tab in the options, select Open One Interface and choose the keyboard shortcuts you want.
+Go to the Script tab in the options, select Smart Interface Menu Opening and choose the keyboard shortcuts you want.
 
-In game, you can now open interface one by one.
+In game, you can now open interface menus one by one or with combinations.
