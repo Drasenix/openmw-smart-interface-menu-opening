@@ -19,7 +19,7 @@ local function windowAlreadyOpened(windowsOpened, windowsToOpen)
    return false
 end
 
-local function displayMenuIsAuthorized()
+local function isDisplayMenuAuthorized()
    if I.UI.getMode() ~= nil and I.UI.getMode() ~= 'Interface'  then
       return false
    end
@@ -32,7 +32,7 @@ local function onKeyPress(key)
       menu_opened = false
    end
 
-   if not displayMenuIsAuthorized()  then
+   if not isDisplayMenuAuthorized() then
       return
    end
 
