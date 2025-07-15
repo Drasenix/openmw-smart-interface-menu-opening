@@ -35,10 +35,10 @@ I.Settings.registerGroup {
             default = input.KEY.M,
         },
         {
-            key = 's_Key_Spells',
+            key = 's_Key_Magic',
             renderer = 'inputKeySelection',            
-            name = 'Key_Spells',
-            description = 'Spells',
+            name = 'Key_Magic',
+            description = 'Magic',
             default = input.KEY.O,
         },
         {
