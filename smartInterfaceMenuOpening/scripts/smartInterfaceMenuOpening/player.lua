@@ -6,13 +6,22 @@ local configPlayer = require('scripts.smartInterfaceMenuOpening.config.player')
 local ui = require('openmw.ui')
 
 local menu_opened = false
-local function onKeyPress(key)      
+local function onKeyPress(key)
+   
+   if key.code == input.KEY.Escape then
+      menu_opened = false
+   end
+
+   if I.UI.getMode() ~= nil and I.UI.getMode() ~= 'Interface'  then
+      return
+   end
+
    windows = {}
    if key.code == configPlayer.options_atoms.s_Key_Inventory then
       table.insert(windows, 'Inventory')      
       if not menu_opened then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows})
-      else
+      else         
          self:sendEvent('SetUiMode', {})
       end
    end
@@ -126,10 +135,6 @@ local function onKeyPress(key)
          self:sendEvent('SetUiMode', {})
       end
    end
-
-   if key.code == input.KEY.Escape then
-      menu_opened = false
-   end
 end
 
 local function addUiMode(options)
@@ -137,6 +142,9 @@ local function addUiMode(options)
 end
 
 local function setUiMode(options)
+   if I.UI.getMode() ~= nil and I.UI.getMode() ~= 'Interface' then
+      return
+   end
    menu_opened = not menu_opened
 end
 
