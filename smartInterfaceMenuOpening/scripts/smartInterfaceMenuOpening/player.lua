@@ -166,10 +166,22 @@ local function setUiMode(options)
    menu_opened = false
 end
 
-local function uiModeChanged(data)
-   if data.oldMode ~= 'Interface' and data.newMode == "Interface" then
+local function resetInventoryForContainer(data)
+   if windows_opened['Inventory'] == nil and data.newMode == "Container" then
+      windows_opened = {'Inventory', 'Container'}
+      I.UI.setMode('Container', windows_opened)
+   end
+end
+
+local function resetMenuForInterface(data)
+   if data.oldMode ~= nil and data.oldMode ~= 'Interface' and data.newMode == "Interface" then
       self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_opened})
-   end   
+   end
+end
+
+local function uiModeChanged(data)
+   resetInventoryForContainer(data)
+   resetMenuForInterface(data)
 end
 
 return {
