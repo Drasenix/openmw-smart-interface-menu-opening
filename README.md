@@ -18,6 +18,8 @@ Go to the Script tab in the options, select Smart Interface Menu Opening and cho
 
 In game, you can now open interface menus one by one or with combinations.
 
+You can close the menu with the same shortcut.
+
 # Nexus Mod
 
 https://www.nexusmods.com/morrowind/mods/57140
