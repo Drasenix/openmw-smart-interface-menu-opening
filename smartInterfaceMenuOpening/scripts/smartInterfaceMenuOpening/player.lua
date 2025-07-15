@@ -166,6 +166,11 @@ local function setUiMode(options)
    menu_opened = false
 end
 
+local function uiModeChanged(data)
+   if data.oldMode ~= 'Interface' and data.newMode == "Interface" then
+      self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_opened})
+   end   
+end
 
 return {
    engineHandlers = {
@@ -174,10 +179,6 @@ return {
    eventHandlers = {      
       AddUiMode = addUiMode,
       SetUiMode = setUiMode,
-      UiModeChanged = function(data)
-         if data.oldMode ~= 'Interface' and data.newMode == "Interface" then
-            self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_opened})
-         end
-      end
+      UiModeChanged = uiModeChanged
    }
 }
