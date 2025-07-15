@@ -138,14 +138,14 @@ local function onKeyPress(key)
 end
 
 local function addUiMode(options)
-   menu_opened = not menu_opened
+   menu_opened = true
 end
 
 local function setUiMode(options)
    if I.UI.getMode() ~= nil and I.UI.getMode() ~= 'Interface' then
       return
    end
-   menu_opened = not menu_opened
+   menu_opened = false
 end
 
 
