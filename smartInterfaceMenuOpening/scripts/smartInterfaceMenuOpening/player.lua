@@ -8,7 +8,7 @@ local ui = require('openmw.ui')
 local menu_opened = false
 local windows_opened = {}
 
-local function newWindowToOpen(windowsOpened, windowsToOpen)
+local function windowAlreadyOpened(windowsOpened, windowsToOpen)
    for opened_key,opened_value in pairs(windowsOpened) do
       for to_open_key,to_open_value in pairs(windowsToOpen) do
          if opened_value == to_open_value then
@@ -32,7 +32,7 @@ local function onKeyPress(key)
    windows_to_open = {}
    if key.code == configPlayer.options_atoms.s_Key_Inventory then
       table.insert(windows_to_open, 'Inventory')      
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -41,7 +41,7 @@ local function onKeyPress(key)
 
    if key.code == configPlayer.options_atoms.s_Key_Map then
       table.insert(windows_to_open, 'Map')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -50,7 +50,7 @@ local function onKeyPress(key)
 
    if key.code == configPlayer.options_atoms.s_Key_Magic then
       table.insert(windows_to_open, 'Magic')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -59,7 +59,7 @@ local function onKeyPress(key)
 
    if key.code == configPlayer.options_atoms.s_Key_Stats then
       table.insert(windows_to_open, 'Stats')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -69,7 +69,7 @@ local function onKeyPress(key)
    if key.code == configPlayer.options_pairs.s_Key_Inventory_Map then
       table.insert(windows_to_open, 'Inventory')
       table.insert(windows_to_open, 'Map')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -79,7 +79,7 @@ local function onKeyPress(key)
    if key.code == configPlayer.options_pairs.s_Key_Inventory_Magic then
       table.insert(windows_to_open, 'Inventory')
       table.insert(windows_to_open, 'Magic')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -89,7 +89,7 @@ local function onKeyPress(key)
    if key.code == configPlayer.options_pairs.s_Key_Inventory_Stats then
       table.insert(windows_to_open, 'Inventory')
       table.insert(windows_to_open, 'Stats')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -99,7 +99,7 @@ local function onKeyPress(key)
    if key.code == configPlayer.options_pairs.s_Key_Map_Magic then
       table.insert(windows_to_open, 'Map')
       table.insert(windows_to_open, 'Magic')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -109,7 +109,7 @@ local function onKeyPress(key)
    if key.code == configPlayer.options_pairs.s_Key_Magic_Stats then
       table.insert(windows_to_open, 'Magic')
       table.insert(windows_to_open, 'Stats')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -120,7 +120,7 @@ local function onKeyPress(key)
       table.insert(windows_to_open, 'Inventory')
       table.insert(windows_to_open, 'Map')
       table.insert(windows_to_open, 'Magic')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -131,7 +131,7 @@ local function onKeyPress(key)
       table.insert(windows_to_open, 'Inventory')
       table.insert(windows_to_open, 'Map')
       table.insert(windows_to_open, 'Stats')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
@@ -142,7 +142,7 @@ local function onKeyPress(key)
       table.insert(windows_to_open, 'Inventory')
       table.insert(windows_to_open, 'Magic')
       table.insert(windows_to_open, 'Stats')
-      if not menu_opened or not newWindowToOpen(windows_opened, windows_to_open) then
+      if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
          self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
       else
          self:sendEvent('SetUiMode', {})
