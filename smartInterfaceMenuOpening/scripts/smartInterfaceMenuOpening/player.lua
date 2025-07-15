@@ -19,13 +19,20 @@ local function windowAlreadyOpened(windowsOpened, windowsToOpen)
    return false
 end
 
+local function displayMenuIsAuthorized()
+   if I.UI.getMode() ~= nil and I.UI.getMode() ~= 'Interface'  then
+      return false
+   end
+   return true
+end
+
 local function onKeyPress(key)
    
    if key.code == input.KEY.Escape then
       menu_opened = false
    end
 
-   if I.UI.getMode() ~= nil and I.UI.getMode() ~= 'Interface'  then
+   if not displayMenuIsAuthorized()  then
       return
    end
 
@@ -156,9 +163,6 @@ local function addUiMode(options)
 end
 
 local function setUiMode(options)
-   if I.UI.getMode() ~= nil and I.UI.getMode() ~= 'Interface' then
-      return
-   end
    menu_opened = false
 end
 
