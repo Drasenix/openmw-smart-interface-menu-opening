@@ -126,3 +126,38 @@ I.Settings.registerGroup {
         },
     },
 }
+
+I.Settings.registerGroup {
+    key = 'Settings/SmartInterfaceMenuOpening/PauseMenu',
+    page = 'SmartInterfaceMenuOpening',
+    l10n = 'SmartInterfaceMenuOpening',
+    name = 'ConfigPauseMenus',
+    permanentStorage = true,
+    settings = {                
+        {
+            key = 'b_Pause_Inventory',
+            renderer = 'checkbox',            
+            name = 'Pause_Inventory',
+            default = true,
+        },
+        {
+            key = 'b_Pause_Map',
+            renderer = 'checkbox',            
+            name = 'Pause_Map',
+            default = true,
+        },
+        {
+            key = 'b_Pause_Magic',
+            renderer = 'checkbox',            
+            name = 'Pause_Magic',
+            default = true,
+        },
+        {
+            key = 'b_Pause_Stats',
+            renderer = 'checkbox',            
+            name = 'Pause_Stats',
+            default = true,
+        },
+    },
+    
+}

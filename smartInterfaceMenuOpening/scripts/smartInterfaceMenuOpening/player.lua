@@ -6,11 +6,12 @@ local configPlayer = require('scripts.smartInterfaceMenuOpening.config.player')
 local ui = require('openmw.ui')
 
 local menu_opened = false
-local windows_opened = {}
+local menus_opened = {}
+local menus_requiring_pause = {}
 
-local function windowAlreadyOpened(windowsOpened, windowsToOpen)
-   for opened_key,opened_value in pairs(windowsOpened) do
-      for to_open_key,to_open_value in pairs(windowsToOpen) do
+local function menuAlreadyOpened(menusOpened, menusToOpen)
+   for opened_key,opened_value in pairs(menusOpened) do
+      for to_open_key,to_open_value in pairs(menusToOpen) do
          if opened_value == to_open_value then
             return true
          end
@@ -26,16 +27,35 @@ local function isDisplayMenuAuthorized()
    return true
 end
 
-local function sendWindowEvent(windows_to_open)
-   if not menu_opened or not windowAlreadyOpened(windows_opened, windows_to_open) then
-      self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_to_open})
+local function sendMenuEvent(menus_to_open)
+   if not menu_opened or not menuAlreadyOpened(menus_opened, menus_to_open) then
+      self:sendEvent('AddUiMode', {mode = 'Interface', windows = menus_to_open})
    else
       self:sendEvent('SetUiMode', {})
    end
 end
 
+local function detectModesPauseSettings()
+   menus_requiring_pause = {}
+   menus_requiring_pause['Inventory'] = configPlayer.options_pauses.b_Pause_Inventory
+   menus_requiring_pause['Map'] = configPlayer.options_pauses.b_Pause_Map
+   menus_requiring_pause['Magic'] = configPlayer.options_pauses.b_Pause_Magic
+   menus_requiring_pause['Stats'] = configPlayer.options_pauses.b_Pause_Stats
+end
+
+local function handlePauseForMenusToOpen(menus_to_open)
+   I.UI.setPauseOnMode("Interface", false)
+   for key,value in pairs(menus_to_open) do
+      if menus_requiring_pause[value] then
+         I.UI.setPauseOnMode("Interface", true)
+         return      
+      end
+   end
+end
+
 local function onKeyPress(key)
-   
+   detectModesPauseSettings()
+
    if key.code == input.KEY.Escape then
       menu_opened = false
    end
@@ -44,82 +64,94 @@ local function onKeyPress(key)
       return
    end
 
-   windows_to_open = {}
+   menus_to_open = {}
    if key.code == configPlayer.options_atoms.s_Key_Inventory then
-      table.insert(windows_to_open, 'Inventory')      
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Inventory')      
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_atoms.s_Key_Map then
-      table.insert(windows_to_open, 'Map')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Map')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_atoms.s_Key_Magic then
-      table.insert(windows_to_open, 'Magic')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Magic')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_atoms.s_Key_Stats then
-      table.insert(windows_to_open, 'Stats')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Stats')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_pairs.s_Key_Inventory_Map then
-      table.insert(windows_to_open, 'Inventory')
-      table.insert(windows_to_open, 'Map')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Inventory')
+      table.insert(menus_to_open, 'Map')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
    
    if key.code == configPlayer.options_pairs.s_Key_Inventory_Magic then
-      table.insert(windows_to_open, 'Inventory')
-      table.insert(windows_to_open, 'Magic')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Inventory')
+      table.insert(menus_to_open, 'Magic')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
    
    if key.code == configPlayer.options_pairs.s_Key_Inventory_Stats then
-      table.insert(windows_to_open, 'Inventory')
-      table.insert(windows_to_open, 'Stats')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Inventory')
+      table.insert(menus_to_open, 'Stats')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
    
    if key.code == configPlayer.options_pairs.s_Key_Map_Magic then
-      table.insert(windows_to_open, 'Map')
-      table.insert(windows_to_open, 'Magic')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Map')
+      table.insert(menus_to_open, 'Magic')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_pairs.s_Key_Magic_Stats then
-      table.insert(windows_to_open, 'Magic')
-      table.insert(windows_to_open, 'Stats')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Magic')
+      table.insert(menus_to_open, 'Stats')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_trios.s_Key_Inventory_Map_Magic then
-      table.insert(windows_to_open, 'Inventory')
-      table.insert(windows_to_open, 'Map')
-      table.insert(windows_to_open, 'Magic')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Inventory')
+      table.insert(menus_to_open, 'Map')
+      table.insert(menus_to_open, 'Magic')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_trios.s_Key_Inventory_Map_Stats then
-      table.insert(windows_to_open, 'Inventory')
-      table.insert(windows_to_open, 'Map')
-      table.insert(windows_to_open, 'Stats')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Inventory')
+      table.insert(menus_to_open, 'Map')
+      table.insert(menus_to_open, 'Stats')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 
    if key.code == configPlayer.options_trios.s_Key_Inventory_Magic_Stats then
-      table.insert(windows_to_open, 'Inventory')
-      table.insert(windows_to_open, 'Magic')
-      table.insert(windows_to_open, 'Stats')
-      sendWindowEvent(windows_to_open)
+      table.insert(menus_to_open, 'Inventory')
+      table.insert(menus_to_open, 'Magic')
+      table.insert(menus_to_open, 'Stats')
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
    end
 end
 
 local function addUiMode(options)
    menu_opened = true
-   windows_opened = options.windows
+   menus_opened = options.windows
 end
 
 local function setUiMode(options)
@@ -127,15 +159,15 @@ local function setUiMode(options)
 end
 
 local function resetInventoryForContainer(data)
-   if windows_opened['Inventory'] == nil and data.newMode == "Container" then
-      windows_opened = {'Inventory', 'Container'}
-      I.UI.setMode('Container', windows_opened)
+   if menus_opened['Inventory'] == nil and data.newMode == "Container" then
+      menus_opened = {'Inventory', 'Container'}
+      I.UI.setMode('Container', menus_opened)
    end
 end
 
 local function resetMenuForInterface(data)
    if data.oldMode ~= nil and data.oldMode ~= 'Interface' and data.newMode == "Interface" then
-      self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_opened})
+      self:sendEvent('AddUiMode', {mode = 'Interface', windows = menus_opened})
    end
 end
 
