@@ -175,7 +175,7 @@ return {
       AddUiMode = addUiMode,
       SetUiMode = setUiMode,
       UiModeChanged = function(data)
-         if data.oldMode == 'Journal' and data.newMode == "Interface"  then
+         if data.oldMode ~= 'Interface' and data.newMode == "Interface" then
             self:sendEvent('AddUiMode', {mode = 'Interface', windows = windows_opened})
          end
       end
