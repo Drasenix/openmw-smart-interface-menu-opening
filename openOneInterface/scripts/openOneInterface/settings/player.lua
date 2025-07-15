@@ -119,20 +119,3 @@ I.Settings.registerGroup {
         },
     },
 }
-
-I.Settings.registerGroup {
-    key = 'Settings/OpenOneInterface/KeyBindings/Quatuors',
-    page = 'OpenOneInterface',
-    l10n = 'OpenOneInterface',
-    name = 'ConfigKeybindingsQuatuors',
-    permanentStorage = true,
-    settings = {                
-        {
-            key = 's_Key_Inventory_Map_Magic_Stats',
-            renderer = 'inputKeySelection',            
-            name = 'Key_Inventory_Map_Magic_Stats',
-            description = 'Inventory_Map_Magic_Stats',
-            default = input.KEY.V,
-        }
-    },
-}

@@ -70,14 +70,6 @@ local function onKeyPress(key)
       table.insert(windows, 'Stats')
       I.UI.setMode('Interface', {windows = windows})
    end
-
-   if key.code == configPlayer.options_quatuors.s_Key_Inventory_Map_Magic_Stats then
-      table.insert(windows, 'Inventory')
-      table.insert(windows, 'Map')
-      table.insert(windows, 'Magic')
-      table.insert(windows, 'Stats')
-      I.UI.setMode('Interface', {windows = windows})
-   end
 end
 
 return {
