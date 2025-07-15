@@ -126,6 +126,10 @@ local function onKeyPress(key)
          self:sendEvent('SetUiMode', {})
       end
    end
+
+   if key.code == input.KEY.Escape then
+      menu_opened = false
+   end
 end
 
 local function addUiMode(options)
