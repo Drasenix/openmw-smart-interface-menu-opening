@@ -8,13 +8,6 @@ local ui = require('openmw.ui')
 local menu_opened = false
 local windows_opened = {}
 
-
-function printObj(obj)
-  for key,value in pairs(obj) do
-      print("found member " .. key .. " -- " .. tostring(value));
-   end
-end
-
 local function newWindowToOpen(windowsOpened, windowsToOpen)
    for opened_key,opened_value in pairs(windowsOpened) do
       for to_open_key,to_open_value in pairs(windowsToOpen) do
