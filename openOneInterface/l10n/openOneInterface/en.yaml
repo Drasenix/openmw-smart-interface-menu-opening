@@ -1,7 +1,10 @@
 ConfigTitle: "Open One Interface"
 ConfigSummary: "Use keyboard shortcuts to open interface menus one by one"
 
-ConfigCategoryClientOptions: "Client Options"
+ConfigKeybindingsAtoms: "Key bindings One Menu"
+ConfigKeybindingsPairs: "Key bindings Two Menus"
+ConfigKeybindingsTrios: "Key bindings Three Menus"
+ConfigKeybindingsQuatuors: "Key bindings All Menus"
 Key_Inventory: "Inventory"
 Key_Map: "Map"
 Key_Spells: "Spells"
