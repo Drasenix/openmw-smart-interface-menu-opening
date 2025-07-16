@@ -17,6 +17,7 @@ local other_modes_menus_requiring_pause = {}
 local autoMove = false
 local attemptToJump = false
 
+
 local function menuAlreadyOpened(menusOpened, menusToOpen)
    for opened_key,opened_value in pairs(menusOpened) do
       for to_open_key,to_open_value in pairs(menusToOpen) do
@@ -230,28 +231,30 @@ local function movementAllowed()
    return controlsAllowed() and not movementControlsOverridden
 end
 
--- code adapted from the open mw playercontrols.lua
-input.registerTriggerHandler('AutoMove', async:callback(function()
-   if not movementAllowed() then return end
-   autoMove = not autoMove
-end))
-
--- code adapted from the open mw playercontrols.lua
-input.registerTriggerHandler('Jump', async:callback(function()
-   if not movementAllowed() then return end
-   attemptToJump = types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Jumping)
-end))
-
--- code adapted from the open mw playercontrols.lua
-input.registerTriggerHandler('AlwaysRun', async:callback(function()
-   if not movementAllowed() then return end
-   settings:set('alwaysRun', not settings:get('alwaysRun'))
-end))
+if configPlayer.options_movements.b_Movements_Allowed then
+   -- code adapted from the open mw playercontrols.lua
+   input.registerTriggerHandler('AutoMove', async:callback(function()
+      if not movementAllowed() then return end
+      autoMove = not autoMove
+   end))
+   
+   -- code adapted from the open mw playercontrols.lua
+   input.registerTriggerHandler('Jump', async:callback(function()
+      if not movementAllowed() then return end
+      attemptToJump = types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Jumping)
+   end))
+   
+   -- code adapted from the open mw playercontrols.lua
+   input.registerTriggerHandler('AlwaysRun', async:callback(function()
+      if not movementAllowed() then return end
+      settings:set('alwaysRun', not settings:get('alwaysRun'))
+   end))
+end
 
 -- code adapted from the open mw playercontrols.lua
 local function handleMovement()
    
-   if not movementAllowed() then return end
+   if not movementAllowed() or not configPlayer.options_movements.b_Movements_Allowed then return end
 
    local movement = input.getRangeActionValue('MoveForward') - input.getRangeActionValue('MoveBackward')
    local sideMovement = input.getRangeActionValue('MoveRight') - input.getRangeActionValue('MoveLeft')

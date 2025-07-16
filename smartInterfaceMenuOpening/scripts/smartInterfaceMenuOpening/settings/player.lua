@@ -231,3 +231,20 @@ I.Settings.registerGroup {
     },
     
 }
+
+I.Settings.registerGroup {
+    key = 'Settings/SmartInterfaceMenuOpening/MovementsMovementsDuringMenu',
+    page = 'SmartInterfaceMenuOpening',
+    l10n = 'SmartInterfaceMenuOpening',
+    name = 'ConfigMovementsDuringMenus',
+    permanentStorage = true,
+    settings = {                
+        {
+            key = 'b_Movements_Allowed',
+            renderer = 'checkbox',            
+            name = 'Movements_Allowed',
+            default = false,
+        },       
+    },
+    
+}

@@ -42,3 +42,6 @@ Pause_Scroll: "Menu Scroll set game to pause"
 Pause_Alchemy: "Menu Alchemy set game to pause"
 Pause_QuickKeysMenu: "Menu QuickKeysMenu set game to pause"
 Pause_Repair: "Menu Repair set game to pause"
+
+ConfigMovementsDuringMenus: "Movements during menu are available (currently unstable)"
+Movements_Allowed: "Allow movements during Menus"
