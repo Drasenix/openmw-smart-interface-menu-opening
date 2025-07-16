@@ -17,6 +17,7 @@ local other_modes_menus_requiring_pause = {}
 local autoMove = false
 local attemptToJump = false
 local alwaysRun = settings:get('alwaysRun')
+local toggleSneak = settings:get('toggleSneak')
 
 local function menuAlreadyOpened(menusOpened, menusToOpen)
    for opened_key,opened_value in pairs(menusOpened) do
@@ -183,6 +184,7 @@ end
 
 local function onSave()
    settings:set('alwaysRun', alwaysRun)
+   settings:set('toggleSneak', toggleSneak)
 end
 
 local function addUiMode(options)
@@ -247,7 +249,13 @@ if configPlayer.options_movements.b_Movements_Allowed then
       if not movementAllowed() then return end
       attemptToJump = types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Jumping)
    end))
-   
+
+   -- code adapted from the open mw playercontrols.lua   
+   input.registerTriggerHandler('ToggleSneak', async:callback(function()
+      if not movementAllowed() then return end
+      toggleSneak = not toggleSneak
+   end))
+
    -- code adapted from the open mw playercontrols.lua
    input.registerTriggerHandler('AlwaysRun', async:callback(function()
       if not movementAllowed()then return end
@@ -274,6 +282,7 @@ local function handleMovement()
    self.controls.sideMovement = sideMovement
    self.controls.run = run
    self.controls.jump = attemptToJump
+   self.controls.sneak = toggleSneak
 
    attemptToJump = false
 end
