@@ -5,6 +5,39 @@ local input = require("openmw.input")
 local l10n = core.l10n('SmartInterfaceMenuOpening')
 local versionString = "1.0.0"
 
+-- inputKeySelection by Pharis
+I.Settings.registerRenderer(
+	"inputKeySelection",
+	function(value, set)
+		local name = "No Key Set"
+		if value then
+			name = input.getKeyName(value)
+		end
+		return {
+			template = I.MWUI.templates.box,
+			content = ui.content {
+				{
+					template = I.MWUI.templates.padding,
+					content = ui.content {
+						{
+							template = I.MWUI.templates.textEditLine,
+							props = {
+								text = name,
+							},
+							events = {
+								keyPress = async:callback(function(e)
+									if e.code == input.KEY.Escape then return end
+									set(e.code)
+								end),
+							},
+						},
+					},
+				},
+			},
+		}
+	end
+)
+
 -- Settings page
 I.Settings.registerPage {
     key = 'SmartInterfaceMenuOpening',
