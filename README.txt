@@ -21,4 +21,4 @@ You can close the menu with the same shortcut.
 
 You can also choose to set the game to pause for each menu.
 
-You can Auto Move when a Menu is not setting the game to pause.
+You can Move, Auto Move, Jump, Always Run when a Menu is not setting the game to pause.
