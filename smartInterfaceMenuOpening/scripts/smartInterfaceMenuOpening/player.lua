@@ -245,8 +245,9 @@ if configPlayer.options_movements.b_Movements_Allowed then
    end))
    
    -- code adapted from the open mw playercontrols.lua
-   input.registerTriggerHandler('AlwaysRun', async:callback(function()
-      if not movementAllowed() then return end
+   input.registerTriggerHandler('AlwaysRun', async:callback(function() 
+      triggerAlreadyAppliedByPlayerControlsLua = I.UI.getMode() == nil
+      if not movementAllowed() or triggerAlreadyAppliedByPlayerControlsLua then return end
       settings:set('alwaysRun', not settings:get('alwaysRun'))
    end))
 end
