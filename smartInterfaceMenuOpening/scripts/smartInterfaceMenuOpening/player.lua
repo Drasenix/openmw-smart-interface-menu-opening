@@ -3,9 +3,11 @@ local async = require('openmw.async')
 local input = require('openmw.input')
 local types = require('openmw.types')
 local self = require('openmw.self')
+local storage = require('openmw.storage')
 local I = require('openmw.interfaces')
 local configPlayer = require('scripts.smartInterfaceMenuOpening.config.player')
 local ui = require('openmw.ui')
+local settings = storage.playerSection('SettingsOMWControls')
 
 local menu_opened = false
 local menus_opened = {}
@@ -13,6 +15,7 @@ local interface_menus_requiring_pause = {}
 local other_modes_menus_requiring_pause = {}
 
 local autoMove = false
+local attemptToJump = false
 
 local function menuAlreadyOpened(menusOpened, menusToOpen)
    for opened_key,opened_value in pairs(menusOpened) do
@@ -208,7 +211,6 @@ end
 local function controlsAllowed()   
    return not core.isWorldPaused()
       and types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Controls)
-      and not I.UI.getMode()
 end
 
 -- code taken from the open mw playercontrols.lua
@@ -223,10 +225,37 @@ input.registerTriggerHandler('AutoMove', async:callback(function()
    end)
 )
 
+-- code taken from the open mw playercontrols.lua
+input.registerTriggerHandler('Jump', async:callback(function()
+   if not movementAllowed() then return end
+      attemptToJump = types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Jumping)
+   end)
+)
+
+-- code taken from the open mw playercontrols.lua
+input.registerTriggerHandler('AlwaysRun', async:callback(function()
+   if not movementAllowed() then return end
+   settings:set('alwaysRun', not settings:get('alwaysRun'))
+end))
+
+-- code taken from the open mw playercontrols.lua
 local function handleMovement()
-   if autoMove then
-      self.controls.movement = 1
+   local movement = input.getRangeActionValue('MoveForward') - input.getRangeActionValue('MoveBackward')
+   local sideMovement = input.getRangeActionValue('MoveRight') - input.getRangeActionValue('MoveLeft')
+   local run = input.getBooleanActionValue('Run') ~= settings:get('alwaysRun')
+
+   if movement ~= 0 then
+      autoMove = false
+   elseif autoMove then
+      movement = 1
    end
+
+   self.controls.movement = movement
+   self.controls.sideMovement = sideMovement
+   self.controls.run = run
+   self.controls.jump = attemptToJump
+
+   attemptToJump = false
 end
 
 return {
