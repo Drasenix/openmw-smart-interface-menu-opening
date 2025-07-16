@@ -16,7 +16,7 @@ local other_modes_menus_requiring_pause = {}
 
 local autoMove = false
 local attemptToJump = false
-
+local alwaysRun = settings:get('alwaysRun')
 
 local function menuAlreadyOpened(menusOpened, menusToOpen)
    for opened_key,opened_value in pairs(menusOpened) do
@@ -181,6 +181,10 @@ local function onKeyPress(key)
    end
 end
 
+local function onSave()
+   settings:set('alwaysRun', alwaysRun)
+end
+
 local function addUiMode(options)
    menu_opened = true
    menus_opened = options.windows
@@ -245,10 +249,9 @@ if configPlayer.options_movements.b_Movements_Allowed then
    end))
    
    -- code adapted from the open mw playercontrols.lua
-   input.registerTriggerHandler('AlwaysRun', async:callback(function() 
-      triggerAlreadyAppliedByPlayerControlsLua = I.UI.getMode() == nil
-      if not movementAllowed() or triggerAlreadyAppliedByPlayerControlsLua then return end
-      settings:set('alwaysRun', not settings:get('alwaysRun'))
+   input.registerTriggerHandler('AlwaysRun', async:callback(function()
+      if not movementAllowed()then return end
+      alwaysRun = not alwaysRun
    end))
 end
 
@@ -259,7 +262,7 @@ local function handleMovement()
 
    local movement = input.getRangeActionValue('MoveForward') - input.getRangeActionValue('MoveBackward')
    local sideMovement = input.getRangeActionValue('MoveRight') - input.getRangeActionValue('MoveLeft')
-   local run = input.getBooleanActionValue('Run') ~= settings:get('alwaysRun')
+   local run = input.getBooleanActionValue('Run') ~= alwaysRun
 
    if movement ~= 0 then
       autoMove = false
@@ -278,7 +281,8 @@ end
 return {
    engineHandlers = {
       onKeyPress = onKeyPress,
-      onFrame = handleMovement
+      onFrame = handleMovement,
+      onSave = onSave
    },
    eventHandlers = {      
       AddUiMode = addUiMode,
