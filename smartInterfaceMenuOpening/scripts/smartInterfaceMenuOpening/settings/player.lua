@@ -1,7 +1,8 @@
 local core = require('openmw.core')
 local I = require('openmw.interfaces')
-local input = require("openmw.input")
-
+local input = require('openmw.input')
+local ui = require('openmw.ui')
+local async = require('openmw.async')
 local l10n = core.l10n('SmartInterfaceMenuOpening')
 local versionString = "1.0.0"
 
