@@ -209,28 +209,40 @@ end
 
 -- code taken from the open mw playercontrols.lua
 local function controlsAllowed()   
+   mode = I.UI.getMode()
+   isModeForbiden = false
+   if mode then
+      isModeForbiden = 
+      mode ~= I.UI.MODE.Interface and 
+      mode ~= I.UI.MODE.Journal and 
+      mode ~= I.UI.MODE.Book and 
+      mode ~= I.UI.MODE.Scroll and 
+      mode ~= I.UI.MODE.Alchemy and 
+      mode ~= I.UI.MODE.QuickKeysMenu and 
+      mode ~= I.UI.MODE.Repair
+   end
+   
    return not core.isWorldPaused()
       and types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Controls)
+      and not isModeForbiden
 end
 
 -- code taken from the open mw playercontrols.lua
-local function movementAllowed()
+local function movementAllowed()   
    return controlsAllowed() and not movementControlsOverridden
 end
 
 -- code taken from the open mw playercontrols.lua
 input.registerTriggerHandler('AutoMove', async:callback(function()
    if not movementAllowed() then return end
-      autoMove = not autoMove
-   end)
-)
+   autoMove = not autoMove
+end))
 
 -- code taken from the open mw playercontrols.lua
 input.registerTriggerHandler('Jump', async:callback(function()
    if not movementAllowed() then return end
-      attemptToJump = types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Jumping)
-   end)
-)
+   attemptToJump = types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Jumping)
+end))
 
 -- code taken from the open mw playercontrols.lua
 input.registerTriggerHandler('AlwaysRun', async:callback(function()
@@ -240,6 +252,9 @@ end))
 
 -- code taken from the open mw playercontrols.lua
 local function handleMovement()
+   if not movementAllowed() then
+      return
+   end
    local movement = input.getRangeActionValue('MoveForward') - input.getRangeActionValue('MoveBackward')
    local sideMovement = input.getRangeActionValue('MoveRight') - input.getRangeActionValue('MoveLeft')
    local run = input.getBooleanActionValue('Run') ~= settings:get('alwaysRun')
