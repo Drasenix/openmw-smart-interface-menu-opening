@@ -158,6 +158,30 @@ I.Settings.registerGroup {
             name = 'Pause_Stats',
             default = true,
         },
+        {
+            key = 'b_Pause_Journal',
+            renderer = 'checkbox',            
+            name = 'Pause_Journal',
+            default = true,
+        },
+        {
+            key = 'b_Pause_Book',
+            renderer = 'checkbox',            
+            name = 'Pause_Book',
+            default = true,
+        },
+        {
+            key = 'b_Pause_Scroll',
+            renderer = 'checkbox',            
+            name = 'Pause_Scroll',
+            default = true,
+        },
+        {
+            key = 'b_Pause_Alchemy',
+            renderer = 'checkbox',            
+            name = 'Pause_Alchemy',
+            default = true,
+        },
     },
     
 }

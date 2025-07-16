@@ -10,6 +10,7 @@ local ui = require('openmw.ui')
 local menu_opened = false
 local menus_opened = {}
 local menus_requiring_pause = {}
+local modes_menus_requiring_pause = {}
 
 local autoMove = false
 
@@ -41,10 +42,15 @@ end
 
 local function detectModesPauseSettings()
    menus_requiring_pause = {}
+   modes_menus_requiring_pause = {}
    menus_requiring_pause[I.UI.WINDOW.Inventory] = configPlayer.options_pauses.b_Pause_Inventory
    menus_requiring_pause[I.UI.WINDOW.Map] = configPlayer.options_pauses.b_Pause_Map
    menus_requiring_pause[I.UI.WINDOW.Magic] = configPlayer.options_pauses.b_Pause_Magic
    menus_requiring_pause[I.UI.WINDOW.Stats] = configPlayer.options_pauses.b_Pause_Stats
+   modes_menus_requiring_pause[I.UI.WINDOW.Journal] = configPlayer.options_pauses.b_Pause_Journal
+   modes_menus_requiring_pause[I.UI.WINDOW.Book] = configPlayer.options_pauses.b_Pause_Book
+   modes_menus_requiring_pause[I.UI.WINDOW.Scroll] = configPlayer.options_pauses.b_Pause_Scroll
+   modes_menus_requiring_pause[I.UI.WINDOW.Alchemy] = configPlayer.options_pauses.b_Pause_Alchemy
 end
 
 local function handlePauseForMenusToOpen(menus_to_open)
@@ -57,6 +63,14 @@ local function handlePauseForMenusToOpen(menus_to_open)
    end
 end
 
+local function handlePauseForModes()
+   I.UI.setPauseOnMode(I.UI.MODE.Journal, modes_menus_requiring_pause[I.UI.WINDOW.Journal])
+   I.UI.setPauseOnMode(I.UI.MODE.Book, modes_menus_requiring_pause[I.UI.WINDOW.Book])
+   I.UI.setPauseOnMode(I.UI.MODE.Scroll, modes_menus_requiring_pause[I.UI.WINDOW.Scroll])
+   I.UI.setPauseOnMode(I.UI.MODE.Alchemy, modes_menus_requiring_pause[I.UI.WINDOW.Alchemy])
+end
+
+
 local function onKeyPress(key)
    detectModesPauseSettings()
 
@@ -67,6 +81,8 @@ local function onKeyPress(key)
    if not isDisplayMenuAuthorized() then
       return
    end
+
+   handlePauseForModes()
 
    menus_to_open = {}
    if key.code == configPlayer.options_atoms.s_Key_Inventory then
@@ -181,11 +197,10 @@ local function uiModeChanged(data)
 end
 
 -- code taken from the open mw playercontrols.lua
-local function controlsAllowed()
+local function controlsAllowed()   
    return not core.isWorldPaused()
       and types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Controls)
-      -- here i removed cndition
-      -- and not I.UI.getMode()
+      and not I.UI.getMode()
 end
 
 -- code taken from the open mw playercontrols.lua
@@ -195,8 +210,7 @@ end
 
 -- code taken from the open mw playercontrols.lua
 input.registerTriggerHandler('AutoMove', async:callback(function()
-   -- adding my condition not to control AutoMove from Interface Menu
-   if not movementAllowed() or menu_opened then return end
+   if not movementAllowed() then return end
       autoMove = not autoMove
    end)
 )
