@@ -182,6 +182,18 @@ I.Settings.registerGroup {
             name = 'Pause_Alchemy',
             default = true,
         },
+        {
+            key = 'b_Pause_QuickKeysMenu',
+            renderer = 'checkbox',            
+            name = 'Pause_QuickKeysMenu',
+            default = true,
+        },
+        {
+            key = 'b_Pause_Repair',
+            renderer = 'checkbox',            
+            name = 'Pause_Repair',
+            default = true,
+        },        
     },
     
 }

@@ -9,8 +9,8 @@ local ui = require('openmw.ui')
 
 local menu_opened = false
 local menus_opened = {}
-local menus_requiring_pause = {}
-local modes_menus_requiring_pause = {}
+local interface_menus_requiring_pause = {}
+local other_modes_menus_requiring_pause = {}
 
 local autoMove = false
 
@@ -40,23 +40,28 @@ local function sendMenuEvent(menus_to_open)
    end
 end
 
-local function detectModesPauseSettings()
-   menus_requiring_pause = {}
-   modes_menus_requiring_pause = {}
-   menus_requiring_pause[I.UI.WINDOW.Inventory] = configPlayer.options_pauses.b_Pause_Inventory
-   menus_requiring_pause[I.UI.WINDOW.Map] = configPlayer.options_pauses.b_Pause_Map
-   menus_requiring_pause[I.UI.WINDOW.Magic] = configPlayer.options_pauses.b_Pause_Magic
-   menus_requiring_pause[I.UI.WINDOW.Stats] = configPlayer.options_pauses.b_Pause_Stats
-   modes_menus_requiring_pause[I.UI.WINDOW.Journal] = configPlayer.options_pauses.b_Pause_Journal
-   modes_menus_requiring_pause[I.UI.WINDOW.Book] = configPlayer.options_pauses.b_Pause_Book
-   modes_menus_requiring_pause[I.UI.WINDOW.Scroll] = configPlayer.options_pauses.b_Pause_Scroll
-   modes_menus_requiring_pause[I.UI.WINDOW.Alchemy] = configPlayer.options_pauses.b_Pause_Alchemy
+local function detectInterfaceMenusPauseSettings()
+   interface_menus_requiring_pause = {}
+   interface_menus_requiring_pause[I.UI.WINDOW.Inventory] = configPlayer.options_pauses.b_Pause_Inventory
+   interface_menus_requiring_pause[I.UI.WINDOW.Map] = configPlayer.options_pauses.b_Pause_Map
+   interface_menus_requiring_pause[I.UI.WINDOW.Magic] = configPlayer.options_pauses.b_Pause_Magic
+   interface_menus_requiring_pause[I.UI.WINDOW.Stats] = configPlayer.options_pauses.b_Pause_Stats   
+end
+
+local function detectOtherModesMenusPauseSettings()
+   other_modes_menus_requiring_pause = {}
+   other_modes_menus_requiring_pause[I.UI.WINDOW.Journal] = configPlayer.options_pauses.b_Pause_Journal
+   other_modes_menus_requiring_pause[I.UI.WINDOW.Book] = configPlayer.options_pauses.b_Pause_Book
+   other_modes_menus_requiring_pause[I.UI.WINDOW.Scroll] = configPlayer.options_pauses.b_Pause_Scroll
+   other_modes_menus_requiring_pause[I.UI.WINDOW.Alchemy] = configPlayer.options_pauses.b_Pause_Alchemy
+   other_modes_menus_requiring_pause[I.UI.WINDOW.QuickKeys] = configPlayer.options_pauses.b_Pause_QuickKeysMenu
+   other_modes_menus_requiring_pause[I.UI.WINDOW.Repair] = configPlayer.options_pauses.b_Pause_Repair
 end
 
 local function handlePauseForMenusToOpen(menus_to_open)
    I.UI.setPauseOnMode(I.UI.MODE.Interface, false)
    for key,value in pairs(menus_to_open) do
-      if menus_requiring_pause[value] then
+      if interface_menus_requiring_pause[value] then
          I.UI.setPauseOnMode(I.UI.MODE.Interface, true)
          return      
       end
@@ -64,16 +69,19 @@ local function handlePauseForMenusToOpen(menus_to_open)
 end
 
 local function handlePauseForModes()
-   I.UI.setPauseOnMode(I.UI.MODE.Journal, modes_menus_requiring_pause[I.UI.WINDOW.Journal])
-   I.UI.setPauseOnMode(I.UI.MODE.Book, modes_menus_requiring_pause[I.UI.WINDOW.Book])
-   I.UI.setPauseOnMode(I.UI.MODE.Scroll, modes_menus_requiring_pause[I.UI.WINDOW.Scroll])
-   I.UI.setPauseOnMode(I.UI.MODE.Alchemy, modes_menus_requiring_pause[I.UI.WINDOW.Alchemy])
+   I.UI.setPauseOnMode(I.UI.MODE.Journal, other_modes_menus_requiring_pause[I.UI.WINDOW.Journal])
+   I.UI.setPauseOnMode(I.UI.MODE.Book, other_modes_menus_requiring_pause[I.UI.WINDOW.Book])
+   I.UI.setPauseOnMode(I.UI.MODE.Scroll, other_modes_menus_requiring_pause[I.UI.WINDOW.Scroll])
+   I.UI.setPauseOnMode(I.UI.MODE.Alchemy, other_modes_menus_requiring_pause[I.UI.WINDOW.Alchemy])
+   I.UI.setPauseOnMode(I.UI.MODE.QuickKeysMenu, other_modes_menus_requiring_pause[I.UI.WINDOW.QuickKeys])
+   I.UI.setPauseOnMode(I.UI.MODE.Repair, other_modes_menus_requiring_pause[I.UI.WINDOW.Repair])
 end
 
 
 local function onKeyPress(key)
-   detectModesPauseSettings()
-
+   detectInterfaceMenusPauseSettings()
+   detectOtherModesMenusPauseSettings()
+   
    if key.code == input.KEY.Escape then
       menu_opened = false
    end
