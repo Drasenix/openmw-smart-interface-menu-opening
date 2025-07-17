@@ -1,7 +1,7 @@
 ConfigTitle: "Smart Interface Menu Opening (SIMO)"
 ConfigSummary: "Use keyboard shortcuts to open interface menus one by one or with combinations"
 
-ConfigKeybindingsAtoms: "Key bindings Menu. You can set multiple menus on same shortcut"
+ConfigKeybindingsAtoms: "Key bindings Menu. You can set multiple menus on the same shortcut"
 Key_Inventory: "Inventory"
 Key_Map: "Map"
 Key_Magic: "Magic"
@@ -23,5 +23,5 @@ Pause_Alchemy: "Menu Alchemy set game to pause"
 Pause_QuickKeysMenu: "Menu QuickKeysMenu set game to pause"
 Pause_Repair: "Menu Repair set game to pause"
 
-ConfigMovementsDuringMenus: "Movements during menu are available (currently unstable)"
+ConfigMovementsDuringMenus: "Movements during menu are available"
 Movements_Allowed: "Allow movements during Menus"
