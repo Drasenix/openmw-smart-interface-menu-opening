@@ -155,10 +155,11 @@ local function openNewMenu(menus_to_open, new_menu)
    handlePauseForMenusToOpen(menus_to_open)
 end
 
-local function onKeyPress(key)
+
+local function onKeyRelease(key)
    detectInterfaceMenusPauseSettings()
    detectOtherModesMenusPauseSettings()
-   
+      
    if key.code == input.KEY.Escape then
       closeMenus()
    end
@@ -300,7 +301,7 @@ end
 
 return {
    engineHandlers = {
-      onKeyPress = onKeyPress,
+      onKeyRelease = onKeyRelease,
       onFrame = handleMovement,
       onSave = onSave
    },
