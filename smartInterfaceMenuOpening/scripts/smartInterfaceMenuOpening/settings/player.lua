@@ -2,39 +2,73 @@ local core = require('openmw.core')
 local I = require('openmw.interfaces')
 local input = require('openmw.input')
 local ui = require('openmw.ui')
+local util = require('openmw.util')
 local async = require('openmw.async')
 local l10n = core.l10n('SmartInterfaceMenuOpening')
 local versionString = "1.0.0"
 
--- inputKeySelection by Pharis
+-- inputSelection inspired by Pharis
 I.Settings.registerRenderer(
-	"inputKeySelection",
+	"inputSelection",
 	function(value, set)
 		local name = "No Key Set"
 		if value then
 			name = input.getKeyName(value)
 		end
 		return {
-			template = I.MWUI.templates.box,
+            type = ui.TYPE.Flex,
+            props = {
+                horizontal = true
+            },
 			content = ui.content {
-				{
-					template = I.MWUI.templates.padding,
-					content = ui.content {
-						{
-							template = I.MWUI.templates.textEditLine,
-							props = {
-								text = name,
-							},
-							events = {
-								keyPress = async:callback(function(e)
-									if e.code == input.KEY.Escape then return end
-									set(e.code)
-								end),
-							},
-						},
-					},
-				},
-			},
+                {
+                    type = ui.TYPE.Container,
+                    template = I.MWUI.templates.box,
+                    content = ui.content {
+                        {
+                            template = I.MWUI.templates.textEditLine,
+                            props = {
+                                text = name,
+                            },
+                            events = {
+                                keyPress = async:callback(function(e)
+                                    if e.code == input.KEY.Escape then return end
+                                    set(e.code)
+                                end),
+                            },
+                        },                                                                        
+                    }
+                },
+                {
+                    type = ui.TYPE.Widget,
+                    template = I.MWUI.templates.interval
+                },
+                {
+                    type = ui.TYPE.Widget,
+                    template = I.MWUI.templates.interval
+                },
+                {
+                    type = ui.TYPE.Widget,
+                    template = I.MWUI.templates.interval
+                },
+                {
+                    type = ui.TYPE.Container,
+                    template = I.MWUI.templates.box,
+                    content = ui.content {
+                        {
+                            template = I.MWUI.templates.textNormal,
+                            props = {
+                                text = " Use Tab ",
+                            },
+                            events = {
+                                mousePress = async:callback(function(e)
+                                    set(input.KEY.Tab)
+                                end),
+                            },
+                        }				
+                    }
+                },
+			},            
 		}
 	end
 )
@@ -56,28 +90,28 @@ I.Settings.registerGroup {
     settings = {        
         {
             key = 's_Key_Inventory',
-            renderer = 'inputKeySelection',            
+            renderer = 'inputSelection',            
             name = 'Key_Inventory',
             description = 'Inventory',
             default = 0,
         },
         {
             key = 's_Key_Map',
-            renderer = 'inputKeySelection',            
+            renderer = 'inputSelection',            
             name = 'Key_Map',
             description = 'Map',
             default = 0,
         },
         {
             key = 's_Key_Magic',
-            renderer = 'inputKeySelection',            
+            renderer = 'inputSelection',            
             name = 'Key_Magic',
             description = 'Magic',
             default = 0,
         },
         {
             key = 's_Key_Stats',
-            renderer = 'inputKeySelection',            
+            renderer = 'inputSelection',            
             name = 'Key_Stats',
             description = 'Stats',
             default = 0,
