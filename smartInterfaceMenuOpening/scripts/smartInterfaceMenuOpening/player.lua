@@ -121,65 +121,6 @@ local function onKeyPress(key)
       sendMenuEvent(menus_to_open)
       handlePauseForMenusToOpen(menus_to_open)
    end
-
-   if key.code == configPlayer.options_pairs.s_Key_Inventory_Map then
-      table.insert(menus_to_open, I.UI.WINDOW.Inventory)
-      table.insert(menus_to_open, I.UI.WINDOW.Map)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
-   
-   if key.code == configPlayer.options_pairs.s_Key_Inventory_Magic then
-      table.insert(menus_to_open, I.UI.WINDOW.Inventory)
-      table.insert(menus_to_open, I.UI.WINDOW.Magic)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
-   
-   if key.code == configPlayer.options_pairs.s_Key_Inventory_Stats then
-      table.insert(menus_to_open, I.UI.WINDOW.Inventory)
-      table.insert(menus_to_open, I.UI.WINDOW.Stats)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
-   
-   if key.code == configPlayer.options_pairs.s_Key_Map_Magic then
-      table.insert(menus_to_open, I.UI.WINDOW.Map)
-      table.insert(menus_to_open, I.UI.WINDOW.Magic)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
-
-   if key.code == configPlayer.options_pairs.s_Key_Magic_Stats then
-      table.insert(menus_to_open, I.UI.WINDOW.Magic)
-      table.insert(menus_to_open, I.UI.WINDOW.Stats)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
-
-   if key.code == configPlayer.options_trios.s_Key_Inventory_Map_Magic then
-      table.insert(menus_to_open, I.UI.WINDOW.Inventory)
-      table.insert(menus_to_open, I.UI.WINDOW.Map)
-      table.insert(menus_to_open, I.UI.WINDOW.Magic)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
-
-   if key.code == configPlayer.options_trios.s_Key_Inventory_Map_Stats then
-      table.insert(menus_to_open, I.UI.WINDOW.Inventory)
-      table.insert(menus_to_open, I.UI.WINDOW.Map)
-      table.insert(menus_to_open, I.UI.WINDOW.Stats)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
-
-   if key.code == configPlayer.options_trios.s_Key_Inventory_Magic_Stats then
-      table.insert(menus_to_open, I.UI.WINDOW.Inventory)
-      table.insert(menus_to_open, I.UI.WINDOW.Magic)
-      table.insert(menus_to_open, I.UI.WINDOW.Stats)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
-   end
 end
 
 local function onSave()
