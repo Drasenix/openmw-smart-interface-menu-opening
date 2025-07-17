@@ -82,13 +82,79 @@ local function handlePauseForModes()
    I.UI.setPauseOnMode(I.UI.MODE.Repair, other_modes_menus_requiring_pause[I.UI.WINDOW.Repair])
 end
 
+local function closeMenus()
+   menu_opened = false
+   menus_opened = {}
+end
+
+function getTableLength(table)
+   local length = 0
+   for key in pairs(table) do 
+      length = length + 1 
+   end
+   return length
+end
+
+function split(inputstr, sep)   
+   local res={}
+   for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+      table.insert(res, str)
+   end
+   return res
+end
+
+local function getMenusForSwitch()
+   menus_for_switch = {}
+   switch_menus_order_str = configPlayer.options_switch.s_Switch_Order
+   menus_name_from_settings = split(switch_menus_order_str, "-")
+   for key, menu_name in pairs(menus_name_from_settings) do 
+      if menu_name ==  I.UI.WINDOW.Inventory then
+         table.insert(menus_for_switch, I.UI.WINDOW.Inventory)
+      elseif menu_name ==  I.UI.WINDOW.Map then
+         table.insert(menus_for_switch, I.UI.WINDOW.Map)
+      elseif menu_name ==  I.UI.WINDOW.Magic then
+         table.insert(menus_for_switch, I.UI.WINDOW.Magic)
+      elseif menu_name ==  I.UI.WINDOW.Stats then
+         table.insert(menus_for_switch, I.UI.WINDOW.Stats)
+      else
+         ui.showMessage(menu_name .. " is not a Menu")
+      end
+   end
+
+   return menus_for_switch
+end
+
+local function switchBetweenMenusAndGetNewOne()
+   menus_for_switch = getMenusForSwitch()
+
+   nb_menus_for_switch = getTableLength(menus_for_switch)
+   
+   if nb_menus_for_switch == 0 then
+      return
+   end
+
+   index_menu_to_open = 1
+   if menus_opened[1] ~= nil then
+      for key,value in pairs(menus_for_switch) do
+         if value == menus_opened[1] then
+            index_menu_to_open = key
+         end
+      end
+   end
+   modulo = nb_menus_for_switch + 1
+   index_menu_to_open = ((index_menu_to_open + 1) % modulo)
+   if index_menu_to_open == 0 then
+      index_menu_to_open = 1
+   end
+   return menus_for_switch[index_menu_to_open]
+end
 
 local function onKeyPress(key)
    detectInterfaceMenusPauseSettings()
    detectOtherModesMenusPauseSettings()
    
    if key.code == input.KEY.Escape then
-      menu_opened = false
+      closeMenus()
    end
 
    if not isDisplayMenuAuthorized() then
@@ -98,6 +164,14 @@ local function onKeyPress(key)
    handlePauseForModes()
 
    menus_to_open = {}
+
+   if key.code == configPlayer.options_switch.s_Key_Switch then
+      menu_to_open = switchBetweenMenusAndGetNewOne()
+      table.insert(menus_to_open, menu_to_open)      
+      sendMenuEvent(menus_to_open)
+      handlePauseForMenusToOpen(menus_to_open)
+   end
+
    if key.code == configPlayer.options_atoms.s_Key_Inventory then
       table.insert(menus_to_open, I.UI.WINDOW.Inventory)      
       sendMenuEvent(menus_to_open)
@@ -134,7 +208,7 @@ local function addUiMode(options)
 end
 
 local function setUiMode(options)
-   menu_opened = false
+   closeMenus()
 end
 
 local function resetInventoryForContainer(data)

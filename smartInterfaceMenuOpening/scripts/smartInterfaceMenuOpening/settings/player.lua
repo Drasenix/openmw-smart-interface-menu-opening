@@ -120,6 +120,30 @@ I.Settings.registerGroup {
 }
 
 I.Settings.registerGroup {
+    key = 'Settings/SmartInterfaceMenuOpening/KeyBindings/Switch',
+    page = 'SmartInterfaceMenuOpening',
+    l10n = 'SmartInterfaceMenuOpening',
+    name = 'ConfigKeybindingsSwitch',
+    permanentStorage = true,
+    settings = {        
+        {
+            key = 's_Key_Switch',
+            renderer = 'inputSelection',            
+            name = 'Key_Switch',
+            description = 'Switch',
+            default = 0,
+        },
+        {
+            key = 's_Switch_Order',
+            renderer = 'textLine',
+            name = 'Switch_Order',
+            description = 'SwitchOrder',            
+            default = 'Map-Inventory-Magic-Stats',
+        }
+    },
+}
+
+I.Settings.registerGroup {
     key = 'Settings/SmartInterfaceMenuOpening/PauseMenu',
     page = 'SmartInterfaceMenuOpening',
     l10n = 'SmartInterfaceMenuOpening',
