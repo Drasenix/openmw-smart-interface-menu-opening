@@ -11,7 +11,7 @@ Map: "Shortcut to open Map"
 Magic: "Shortcut to open Magic"
 Stats: "Shortcut to open Stats"
 
-ConfigKeybindingsSwitch: "Use one touch to switch between menus"
+ConfigKeybindingsSwitch: "Use one shortcut to switch between menus"
 Key_Switch: "Switch"
 Switch: "Shortcut to switch menus"
 Switch_Order: "Menus order during the switch (You can use Inventory/Map/Stats/Magic)"
