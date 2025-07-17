@@ -149,6 +149,12 @@ local function switchBetweenMenusAndGetNewOne()
    return menus_for_switch[index_menu_to_open]
 end
 
+local function openNewMenu(menus_to_open, new_menu)
+   table.insert(menus_to_open, new_menu)
+   sendMenuEvent(menus_to_open)
+   handlePauseForMenusToOpen(menus_to_open)
+end
+
 local function onKeyPress(key)
    detectInterfaceMenusPauseSettings()
    detectOtherModesMenusPauseSettings()
@@ -167,33 +173,23 @@ local function onKeyPress(key)
 
    if key.code == configPlayer.options_switch.s_Key_Switch then
       menu_to_open = switchBetweenMenusAndGetNewOne()
-      table.insert(menus_to_open, menu_to_open)      
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
+      openNewMenu(menus_to_open, menu_to_open)                  
    end
 
    if key.code == configPlayer.options_atoms.s_Key_Inventory then
-      table.insert(menus_to_open, I.UI.WINDOW.Inventory)      
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
+      openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
    end
 
    if key.code == configPlayer.options_atoms.s_Key_Map then
-      table.insert(menus_to_open, I.UI.WINDOW.Map)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
+      openNewMenu(menus_to_open, I.UI.WINDOW.Map)
    end
 
    if key.code == configPlayer.options_atoms.s_Key_Magic then
-      table.insert(menus_to_open, I.UI.WINDOW.Magic)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
+      openNewMenu(menus_to_open, I.UI.WINDOW.Magic)
    end
 
    if key.code == configPlayer.options_atoms.s_Key_Stats then
-      table.insert(menus_to_open, I.UI.WINDOW.Stats)
-      sendMenuEvent(menus_to_open)
-      handlePauseForMenusToOpen(menus_to_open)
+      openNewMenu(menus_to_open, I.UI.WINDOW.Stats)
    end
 end
 
