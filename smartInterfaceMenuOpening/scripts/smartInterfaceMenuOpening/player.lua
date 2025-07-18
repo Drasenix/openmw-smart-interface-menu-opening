@@ -179,18 +179,23 @@ local function onKeyRelease(key)
          self:sendEvent('SetUiMode', {})
          return
       end
+
       openNewMenu(menus_to_open, menu_to_open)                  
+   end
 
-   elseif key.code == configPlayer.options_atoms.s_Key_Inventory then
+   if key.code == configPlayer.options_atoms.s_Key_Inventory then
       openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
+   end
 
-   elseif key.code == configPlayer.options_atoms.s_Key_Map then
+   if key.code == configPlayer.options_atoms.s_Key_Map then
       openNewMenu(menus_to_open, I.UI.WINDOW.Map)
+   end
 
-   elseif key.code == configPlayer.options_atoms.s_Key_Magic then
+   if key.code == configPlayer.options_atoms.s_Key_Magic then
       openNewMenu(menus_to_open, I.UI.WINDOW.Magic)
+   end
 
-   elseif key.code == configPlayer.options_atoms.s_Key_Stats then
+   if key.code == configPlayer.options_atoms.s_Key_Stats then
       openNewMenu(menus_to_open, I.UI.WINDOW.Stats)
    end
 end
