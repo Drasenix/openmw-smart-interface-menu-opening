@@ -86,6 +86,7 @@ I.Settings.registerGroup {
     page = 'SmartInterfaceMenuOpening',
     l10n = 'SmartInterfaceMenuOpening',
     name = 'ConfigKeybindingsAtoms',
+    description = "ConfigKeybindingsAtomsDesc",
     permanentStorage = true,
     settings = {        
         {
@@ -139,7 +140,14 @@ I.Settings.registerGroup {
             name = 'Switch_Order',
             description = 'SwitchOrder',            
             default = 'Map-Inventory-Magic-Stats',
-        }
+        },
+        {
+            key = 'b_Switch_Loop',
+            renderer = 'checkbox',            
+            name = 'Switch_Loop',
+            description = 'SwitchLoop',
+            default = true,
+        },
     },
 }
 
@@ -148,6 +156,7 @@ I.Settings.registerGroup {
     page = 'SmartInterfaceMenuOpening',
     l10n = 'SmartInterfaceMenuOpening',
     name = 'ConfigPauseMenus',
+    description = 'ConfigPauseMenusDesc',
     permanentStorage = true,
     settings = {                
         {
@@ -218,13 +227,15 @@ I.Settings.registerGroup {
     key = 'Settings/SmartInterfaceMenuOpening/MovementsMovementsDuringMenu',
     page = 'SmartInterfaceMenuOpening',
     l10n = 'SmartInterfaceMenuOpening',
-    name = 'ConfigMovementsDuringMenus',
+    name = 'ConfigMovementsDuringMenus',    
+    description = 'ConfigMovementsDuringMenusDesc',
     permanentStorage = true,
     settings = {                
         {
             key = 'b_Movements_Allowed',
             renderer = 'checkbox',            
             name = 'Movements_Allowed',
+            description = 'MovementsAllowed',
             default = false,
         },       
     },

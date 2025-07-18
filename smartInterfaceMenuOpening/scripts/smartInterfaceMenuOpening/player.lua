@@ -132,12 +132,22 @@ local function switchBetweenMenusAndGetNewOne()
          end
       end
    end
+   
    modulo = nb_menus_for_switch + 1
    index_menu_to_open = ((index_menu_to_open + 1) % modulo)
+
+   loop_enabled = configPlayer.options_switch.b_Switch_Loop
+   
    if index_menu_to_open == 0 then
-      index_menu_to_open = 1
+      if loop_enabled then
+         index_menu_to_open = 1
+      else
+         return
+      end
    end
    return menus_for_switch[index_menu_to_open]
+
+
 end
 
 local function openNewMenu(menus_to_open, new_menu)
@@ -165,6 +175,11 @@ local function onKeyRelease(key)
 
    if key.code == configPlayer.options_switch.s_Key_Switch then
       menu_to_open = switchBetweenMenusAndGetNewOne()
+      if menu_to_open == nil then
+         self:sendEvent('SetUiMode', {})
+         return
+      end
+
       openNewMenu(menus_to_open, menu_to_open)                  
    end
 
