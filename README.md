@@ -16,13 +16,9 @@ Launch the game
 
 Go to the Script tab in the options, select Smart Interface Menu Opening and choose the keyboard shortcuts you want.
 
-In game, you can now open interface menus one by one, with combinations or witch switching method.
-
-You can close the menu with the same shortcut.
-
-You can also choose to set the game to pause for each menu.
-
-You can able/disable Move, Auto Move, Jump, Always Run, Sneak when a Menu is not setting the game to pause.
+In the game, you can now open and close interface menus one by one using keyboard shortcuts, combinations, or the switching method.
+You can also choose to pause the game for each menu.
+You can enable or disable Move, Auto Move, Jump, Always Run, and Sneak when a menu is open without setting the game to pause.
 
 # Nexus Mod
 
