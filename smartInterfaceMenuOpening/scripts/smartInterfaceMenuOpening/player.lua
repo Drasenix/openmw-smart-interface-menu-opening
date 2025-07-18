@@ -173,7 +173,6 @@ local function onKeyRelease(key)
          self:sendEvent('SetUiMode', {})
          return
       end
-
       openNewMenu(menus_to_open, menu_to_open)                  
    end
 
@@ -211,7 +210,7 @@ end
 local function resetInventoryForContainer(data)
    if menus_opened[I.UI.WINDOW.Inventory] == nil and data.newMode == I.UI.MODE.Container then
       menus_opened = {I.UI.WINDOW.Inventory, I.UI.WINDOW.Container}
-      I.UI.setMode(I.UI.MODE.Container, menus_opened)
+      self:sendEvent('SetUiMode', {mode = I.UI.MODE.Container, windows = menus_opened})
    end
 end
 
