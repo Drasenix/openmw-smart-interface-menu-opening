@@ -95,19 +95,10 @@ function getTableLength(table)
    return length
 end
 
-function split(inputstr, sep)   
-   local res={}
-   for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-      table.insert(res, str)
-   end
-   return res
-end
-
 local function getMenusForSwitch()
    menus_for_switch = {}
    switch_menus_order_str = configPlayer.options_switch.s_Switch_Order
-   menus_name_from_settings = split(switch_menus_order_str, "-")
-   for key, menu_name in pairs(menus_name_from_settings) do 
+   for menu_name in string.gmatch(switch_menus_order_str, "([^-]+)") do
       if menu_name ==  I.UI.WINDOW.Inventory then
          table.insert(menus_for_switch, I.UI.WINDOW.Inventory)
       elseif menu_name ==  I.UI.WINDOW.Map then
@@ -132,8 +123,8 @@ local function switchBetweenMenusAndGetNewOne()
    if nb_menus_for_switch == 0 then
       return
    end
-
-   index_menu_to_open = 1
+   
+   index_menu_to_open = 0
    if menus_opened[1] ~= nil then
       for key,value in pairs(menus_for_switch) do
          if value == menus_opened[1] then
