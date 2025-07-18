@@ -124,21 +124,15 @@ local function switchBetweenMenusAndGetNewOne()
       return
    end
    
-   index_menu_to_open = 0
-   if menus_opened[1] ~= nil then
-      for key,value in pairs(menus_for_switch) do
-         if value == menus_opened[1] then
-            index_menu_to_open = key
-         end
-      end
+   if menus_opened[1] == nil then
+      index_menu_to_open = 1
+   else      
+      modulo = nb_menus_for_switch + 1
+      index_menu_to_open = ((index_menu_to_open + 1) % modulo)
    end
    
-   modulo = nb_menus_for_switch + 1
-   index_menu_to_open = ((index_menu_to_open + 1) % modulo)
-
-   loop_enabled = configPlayer.options_switch.b_Switch_Loop
-   
    if index_menu_to_open == 0 then
+      loop_enabled = configPlayer.options_switch.b_Switch_Loop
       if loop_enabled then
          index_menu_to_open = 1
       else
