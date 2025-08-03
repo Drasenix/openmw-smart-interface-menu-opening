@@ -16,7 +16,7 @@ ConfigKeybindingsSwitch: "Use one shortcut to switch between menus"
 Key_Switch: "Switch"
 Switch: "Shortcut to switch between menus."
 Switch_Order: "Menus order during the switch"
-SwitchOrder: "You can use the following menus Inventory, Map, Stats, and/or Magic. You must write those you want in the list using the separator - . For example, you can write Inventory-Stats to create a list of modes containing Inventory and Stats. You will be able to switch between them using the shortcut. In this case Inventory will be the the first to appear. If you write Map, only the Map menu will be used."
+SwitchOrder: "You can use the following menus Inventory, Map, Stats, and/or Magic. You must write those you want in the list using the separator - . For example, you can write Inventory-Stats to create a list of modes containing Inventory and Stats. You will be able to switch between them using the shortcut. In this case Inventory will be the first to appear. If you write Map, only the Map menu will be used."
 Switch_Loop: "Infinite switch"
 SwitchLoop: "Start over after the last menu (Yes) / Close the Interface after the last menu (No)."
 
