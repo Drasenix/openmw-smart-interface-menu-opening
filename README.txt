@@ -13,8 +13,8 @@ Launch the game
 
 How to use
 
-Go to the Script tab in the options, select Smart Interface Menu Opening and choose the keyboard shortcuts you want.
+Go to the Script tab in the options, select Smart Interface Menu Opening and choose the shortcuts you want.
 
-In the game, you can now open and close interface menus one by one using keyboard shortcuts, combinations, or the switching method.
+In the game, you can now use shortcuts to open and close interface menus one by one, with combinations or even with the switching method.
 You can also choose to (un)pause the game for each menu.
 You can enable or disable Move, Auto Move, Jump, Always Run, and Sneak when a menu is open without setting the game to pause.

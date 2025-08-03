@@ -9,11 +9,23 @@ local versionString = "1.0.0"
 
 -- inputSelection inspired by Pharis
 I.Settings.registerRenderer(
-	"inputSelection",
+    "inputSelection",
 	function(value, set)
+        local interval = {
+            type = ui.TYPE.Widget,
+            template = I.MWUI.templates.interval
+        }
 		local name = "No Key Set"
 		if value then
-			name = input.getKeyName(value)
+            if value == 1 then
+                name = "Left Click"
+            elseif value == 2 then
+                name = "Middle Click"
+            elseif value == 3 then
+                name = "Right Click"
+            else
+                name = input.getKeyName(value)
+            end
 		end
 		return {
             type = ui.TYPE.Flex,
@@ -39,18 +51,9 @@ I.Settings.registerRenderer(
                         },                                                                        
                     }
                 },
-                {
-                    type = ui.TYPE.Widget,
-                    template = I.MWUI.templates.interval
-                },
-                {
-                    type = ui.TYPE.Widget,
-                    template = I.MWUI.templates.interval
-                },
-                {
-                    type = ui.TYPE.Widget,
-                    template = I.MWUI.templates.interval
-                },
+                interval,
+                interval,
+                interval,
                 {
                     type = ui.TYPE.Container,
                     template = I.MWUI.templates.box,
@@ -58,11 +61,71 @@ I.Settings.registerRenderer(
                         {
                             template = I.MWUI.templates.textNormal,
                             props = {
-                                text = " Use Tab ",
+                                text = " Tab ",
                             },
                             events = {
                                 mousePress = async:callback(function(e)
                                     set(input.KEY.Tab)
+                                end),
+                            },
+                        }				
+                    }
+                },
+                interval,
+                interval,
+                interval,
+                {
+                    type = ui.TYPE.Container,
+                    template = I.MWUI.templates.box,
+                    content = ui.content {
+                        {
+                            template = I.MWUI.templates.textNormal,
+                            props = {
+                                text = " Left Click ",
+                            },
+                            events = {
+                                mousePress = async:callback(function(e)
+                                    set(1)
+                                end),
+                            },
+                        }				
+                    }
+                },
+                interval,
+                interval,
+                interval,
+                {
+                    type = ui.TYPE.Container,
+                    template = I.MWUI.templates.box,
+                    content = ui.content {
+                        {
+                            template = I.MWUI.templates.textNormal,
+                            props = {
+                                text = " Middle Click ",
+                            },
+                            events = {
+                                mousePress = async:callback(function(e)
+                                    set(2)
+                                end),
+                            },
+                        }				
+                    }
+                },
+                interval,
+                interval,
+                interval,              
+                {
+                    type = ui.TYPE.Container,
+                    template = I.MWUI.templates.box,
+                    content = ui.content {
+                        {
+                            template = I.MWUI.templates.textNormal,
+                            props = {
+                                text = " Right Click ",
+                            },
+                            events = {
+                                mousePress = async:callback(function(e)
+                                    set(3)
                                 end),
                             },
                         }				

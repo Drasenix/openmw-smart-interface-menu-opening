@@ -150,6 +150,32 @@ local function openNewMenu(menus_to_open, new_menu)
    handlePauseForMenusToOpen(menus_to_open)
 end
 
+local function checkEntryAndHandleMenuOpening(code_binding)
+   if code_binding == configPlayer.options_switch.s_Key_Switch then
+      menu_to_open = switchBetweenMenusAndGetNewOne()
+      if menu_to_open == nil then
+         self:sendEvent('SetUiMode', {})
+         return
+      end
+      openNewMenu(menus_to_open, menu_to_open)                  
+   end
+
+   if code_binding == configPlayer.options_atoms.s_Key_Inventory then
+      openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
+   end
+
+   if code_binding == configPlayer.options_atoms.s_Key_Map then
+      openNewMenu(menus_to_open, I.UI.WINDOW.Map)
+   end
+
+   if code_binding == configPlayer.options_atoms.s_Key_Magic then
+      openNewMenu(menus_to_open, I.UI.WINDOW.Magic)
+   end
+
+   if code_binding == configPlayer.options_atoms.s_Key_Stats then
+      openNewMenu(menus_to_open, I.UI.WINDOW.Stats)
+   end
+end
 
 local function onKeyRelease(key)
    detectInterfaceMenusPauseSettings()
@@ -166,31 +192,22 @@ local function onKeyRelease(key)
    handlePauseForModes()
 
    menus_to_open = {}
+   checkEntryAndHandleMenuOpening(key.code)   
+end
 
-   if key.code == configPlayer.options_switch.s_Key_Switch then
-      menu_to_open = switchBetweenMenusAndGetNewOne()
-      if menu_to_open == nil then
-         self:sendEvent('SetUiMode', {})
-         return
-      end
-      openNewMenu(menus_to_open, menu_to_open)                  
+local function onMouseButtonPress(button)
+   detectInterfaceMenusPauseSettings()
+   detectOtherModesMenusPauseSettings()
+      
+
+   if not isDisplayMenuAuthorized() then
+      return
    end
 
-   if key.code == configPlayer.options_atoms.s_Key_Inventory then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
-   end
+   handlePauseForModes()
 
-   if key.code == configPlayer.options_atoms.s_Key_Map then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Map)
-   end
-
-   if key.code == configPlayer.options_atoms.s_Key_Magic then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Magic)
-   end
-
-   if key.code == configPlayer.options_atoms.s_Key_Stats then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Stats)
-   end
+   menus_to_open = {}
+   checkEntryAndHandleMenuOpening(button)   
 end
 
 local function onSave()
@@ -301,6 +318,7 @@ end
 return {
    engineHandlers = {
       onKeyRelease = onKeyRelease,
+      onMouseButtonPress = onMouseButtonPress,
       onFrame = handleMovement,
       onSave = onSave
    },
