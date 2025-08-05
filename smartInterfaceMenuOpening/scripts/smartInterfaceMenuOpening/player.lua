@@ -87,14 +87,6 @@ local function closeMenus()
    menus_opened = {}
 end
 
-function getTableLength(table)
-   local length = 0
-   for key in pairs(table) do 
-      length = length + 1 
-   end
-   return length
-end
-
 local function getMenusForSwitch()
    menus_for_switch = {}
    switch_menus_order_str = configPlayer.options_switch.s_Switch_Order
@@ -118,7 +110,7 @@ end
 local function switchBetweenMenusAndGetNewOne()
    menus_for_switch = getMenusForSwitch()
 
-   nb_menus_for_switch = getTableLength(menus_for_switch)
+   nb_menus_for_switch = #menus_for_switch
    
    if nb_menus_for_switch == 0 then
       return
