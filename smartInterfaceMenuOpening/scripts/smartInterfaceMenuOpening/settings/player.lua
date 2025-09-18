@@ -151,7 +151,14 @@ I.Settings.registerGroup {
     name = 'ConfigKeybindingsAtoms',
     description = "ConfigKeybindingsAtomsDesc",
     permanentStorage = true,
-    settings = {        
+    settings = {    
+        {
+            key = 'b_Show_Warning',
+            renderer = 'checkbox',            
+            name = 'Show_Warning',
+            description = 'ShowWarning',
+            default = true,
+        },    
         {
             key = 's_Key_Inventory',
             renderer = 'inputSelection',            

@@ -162,10 +162,20 @@ local function checkEntryAndHandleMenuOpening(code_binding)
    end   
    letter_key_has_been_pressed = checkIsLetterKey(code_binding)
    
+   print(configPlayer.options_atoms.b_Show_Warning)
+
    if letter_key_has_been_pressed and is_inventory_opened then
-      if code_binding == configPlayer.options_atoms.s_Key_Inventory then
-         openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
-      end   
+      if configPlayer.options_atoms.b_Show_Warning then
+         if code_binding == configPlayer.options_switch.s_Key_Switch 
+         or code_binding == configPlayer.options_atoms.s_Key_Inventory 
+         or code_binding == configPlayer.options_atoms.s_Key_Inventory 
+         or code_binding == configPlayer.options_atoms.s_Key_Map 
+         or code_binding == configPlayer.options_atoms.s_Key_Magic 
+         or code_binding == configPlayer.options_atoms.s_Key_Stats 
+         then
+            ui.showMessage("Shortcut (letter) not available. Priority to search bar :)")
+         end
+      end
    else
       if code_binding == configPlayer.options_switch.s_Key_Switch then
          menu_to_open = switchBetweenMenusAndGetNewOne()
@@ -198,8 +208,7 @@ local function checkEntryAndHandleMenuOpening(code_binding)
 
 end
 
-local function onKeyRelease(key)      
-   print(key.symbol .. "  " .. key.code)
+local function onKeyRelease(key)         
    detectInterfaceMenusPauseSettings()
    detectOtherModesMenusPauseSettings()
       
