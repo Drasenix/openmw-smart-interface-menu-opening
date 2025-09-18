@@ -9,6 +9,7 @@ local configPlayer = require('scripts.smartInterfaceMenuOpening.config.player')
 local ui = require('openmw.ui')
 local settings = storage.playerSection('SettingsOMWControls')
 
+local letters_key_code = {20,5,6,7,8,9,10,11,12,13,14,15,51,17,18,19,4,21,22,23,24,25,29,27,28,26}
 local menu_opened = false
 local menus_opened = {}
 local interface_menus_requiring_pause = {}
@@ -136,6 +137,15 @@ local function switchBetweenMenusAndGetNewOne()
 
 end
 
+local function checkIsLetterKey(code)
+   for key,value in pairs(letters_key_code) do
+      if value == code then
+         return true
+      end
+   end
+   return false
+end
+
 local function openNewMenu(menus_to_open, new_menu)
    table.insert(menus_to_open, new_menu)
    sendMenuEvent(menus_to_open)
@@ -143,33 +153,53 @@ local function openNewMenu(menus_to_open, new_menu)
 end
 
 local function checkEntryAndHandleMenuOpening(code_binding)
-   if code_binding == configPlayer.options_switch.s_Key_Switch then
-      menu_to_open = switchBetweenMenusAndGetNewOne()
-      if menu_to_open == nil then
-         self:sendEvent('SetUiMode', {})
-         return
+   
+   is_inventory_opened = false
+   for key,value in pairs(menus_opened) do
+      if value == I.UI.WINDOW.Inventory then
+         is_inventory_opened = true
       end
-      openNewMenu(menus_to_open, menu_to_open)                  
+   end   
+   letter_key_has_been_pressed = checkIsLetterKey(code_binding)
+   
+   if letter_key_has_been_pressed and is_inventory_opened then
+      if code_binding == configPlayer.options_atoms.s_Key_Inventory then
+         openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
+      end   
+   else
+      if code_binding == configPlayer.options_switch.s_Key_Switch then
+         menu_to_open = switchBetweenMenusAndGetNewOne()
+         if menu_to_open == nil then
+            self:sendEvent('SetUiMode', {})
+            return
+         end
+         openNewMenu(menus_to_open, menu_to_open)                  
+      end
+      if code_binding == configPlayer.options_atoms.s_Key_Inventory then
+         openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
+      end
+   
+      if code_binding == configPlayer.options_atoms.s_Key_Inventory then
+         openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
+      end
+   
+      if code_binding == configPlayer.options_atoms.s_Key_Map then
+         openNewMenu(menus_to_open, I.UI.WINDOW.Map)
+      end
+   
+      if code_binding == configPlayer.options_atoms.s_Key_Magic then
+         openNewMenu(menus_to_open, I.UI.WINDOW.Magic)
+      end
+   
+      if code_binding == configPlayer.options_atoms.s_Key_Stats then
+         openNewMenu(menus_to_open, I.UI.WINDOW.Stats)
+      end
    end
 
-   if code_binding == configPlayer.options_atoms.s_Key_Inventory then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Inventory)
-   end
-
-   if code_binding == configPlayer.options_atoms.s_Key_Map then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Map)
-   end
-
-   if code_binding == configPlayer.options_atoms.s_Key_Magic then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Magic)
-   end
-
-   if code_binding == configPlayer.options_atoms.s_Key_Stats then
-      openNewMenu(menus_to_open, I.UI.WINDOW.Stats)
-   end
 end
 
-local function onKeyRelease(key)
+local function onKeyRelease(key)      
+   print(key.symbol .. "  " .. key.code)
    detectInterfaceMenusPauseSettings()
    detectOtherModesMenusPauseSettings()
       
